@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Category Name: <%= @category.name %></h3>
+<h3>Parent Categories:</h3>
+<% if @parent_categories.empty? %>
+  <h4>No parent categories available</h4>
+<% else %>
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @parent_categories.each do |parent_category| %>
+      <tr>
+        <td><%= parent_category.id %></td>
+        <td><%= parent_category.name %></td>
+        <td><%= link_to 'Show', parent_category %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<h3>Child Categories:</h3>
+<% if @child_categories.empty? %>
+  <h4>No child categories available</h4>
+<% else %>
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @child_categories.each do |child_category| %>
+      <tr>
+        <td><%= child_category.id %></td>
+        <td><%= child_category.name %></td>
+        <td><%= link_to 'Show', child_category %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+<%= link_to 'Back', categories_path %>

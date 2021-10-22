@@ -1,0 +1,39 @@
+<%= form_with(model: category) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form_content">
+    <div class="field">
+      <%= form.label :name %> <br />
+      <%= form.text_area :name %> <br />
+    </div>
+    <div class="field">
+      <%= form.label :description %> <br />
+      <%= form.text_area :description %> <br />
+    </div>
+    <div class="field">
+      <%= form.label "Select Parent Category" %> <br />
+      <%# Category.all.each do |category| %>
+<!--        <input type="checkbox" name="parent_ids[]" value="2" />-->
+        <%#= check_box_tag "parent_ids[]", category.id %>
+        <%#=h category.name %>
+        <%#= form.select_tag "parent_ids", options_from_collection_for_select(Category.all, "id", "name") %>
+        <%= form.collection_select(:parent_ids, Category.all, :id, :name, {}, class: "selectpicker", title: "Choose Parent(s)", multiple: true, data: { style: "form-control", size: "5" }) %>
+
+    <%# end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
